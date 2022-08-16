@@ -8,10 +8,9 @@ import (
 )
 
 func ExampleNew_base64ContentTransferEncoding() {
-	w := streamsplit.New(76, []byte("\n"), os.Stdout)
-	mime := base64.NewEncoder(base64.StdEncoding, w)
-	mime.Write([]byte(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dui lorem, venenatis sed convallis in, rhoncus ut enim.`))
-	mime.Close()
+	mime64 := base64.NewEncoder(base64.StdEncoding, streamsplit.New(76, []byte("\n"), os.Stdout))
+	mime64.Write([]byte(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dui lorem, venenatis sed convallis in, rhoncus ut enim.`))
+	mime64.Close()
 
 	// Output:
 	// TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4g
