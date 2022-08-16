@@ -1,6 +1,10 @@
 # streamsplit
 Simple Go package to split data written to an io.Writer.
 
+``` 
+go get github.com/ferdypruis/streamsplit
+```
+
 ## MIME-Base64
 Could for example be used to implement base64 Content-Transfer-Encoding when sending e-mail.
 ```go
