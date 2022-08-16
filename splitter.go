@@ -2,7 +2,6 @@ package streamsplit
 
 import (
 	"io"
-	"sync"
 )
 
 // New returns a splitter, injecting sep every length bytes written to w.
@@ -36,16 +35,13 @@ type splitter struct {
 	sep []byte
 	// w is the Writer the split data is written to.
 	w io.Writer
-	// mutex serializes writes due to access to splitter.pos
-	mutex sync.Mutex
 	// pos remembers how long the current line written to w is.
 	pos int
 }
 
+// Write writes p to the writer, injecting the separator where needed.
+// p must not be reused after invocation.
 func (l *splitter) Write(p []byte) (n int, err error) {
-	l.mutex.Lock()
-	defer l.mutex.Unlock()
-
 	var nn int
 	for l.pos+len(p) > l.len {
 		// write partial data
